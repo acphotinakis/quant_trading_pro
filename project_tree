@@ -1,0 +1,23 @@
+.quant_env) andrewphotinakis@Andrews-MacBook-Pro-16 quant_trading_pro % tree
+.
+├── config
+├── data
+│   ├── features
+│   ├── models
+│   ├── processed
+│   └── raw
+├── docker
+├── notebooks
+├── README.md
+├── requirements.txt
+├── scripts
+├── src
+│   ├── api
+│   ├── data
+│   ├── features
+│   ├── models
+│   ├── trading
+│   └── utils
+└── tests
+
+18 directories, 2 files
