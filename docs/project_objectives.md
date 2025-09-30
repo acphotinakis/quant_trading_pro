@@ -71,3 +71,4 @@ Develop a systematic, machine learning-driven stock trading system that can:
 - Costs: 5-20bps transaction costs
 - No leverage initially
 - Long-only positions initially
+
