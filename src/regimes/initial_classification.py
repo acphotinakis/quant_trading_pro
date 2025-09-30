@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 import logging
 from pathlib import Path
 import json
+import yaml
 
 
 class InitialRegimeClassifier:
@@ -33,14 +34,16 @@ class InitialRegimeClassifier:
         try:
             # VIX data
             vix = yf.download("^VIX", start=start_date, end=end_date, progress=False)
-            vix = vix["Close"].rename("VIX")
+            vix = vix["Close", "^VIX"].copy()
+            vix.name = "VIX"
 
-            # Treasury yields
             tnx = yf.download("^TNX", start=start_date, end=end_date, progress=False)
-            tnx = tnx["Close"].rename("TNX_10Y")
+            tnx = tnx["Close", "^TNX"].copy()
+            tnx.name = "TNX_10Y"
 
             irx = yf.download("^IRX", start=start_date, end=end_date, progress=False)
-            irx = irx["Close"].rename("IRX_3M")
+            irx = irx["Close", "^IRX"].copy()
+            irx.name = "IRX_3M"
 
             # Yield curve
             yield_curve = (tnx - irx).rename("YIELD_CURVE")
