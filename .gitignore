@@ -1,5 +1,6 @@
 .quant_env/
 .env
 
-data/
+data/*
 logs/*
+reports/*

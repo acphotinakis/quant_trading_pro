@@ -1,0 +1,89 @@
+# Data Sources Configuration - Phase 2
+providers:
+  primary: "alpaca"
+  fallback_chain: ["alpaca", "yfinance", "alpha_vantage", "manual_fallback"]
+  
+  alpaca:
+    base_url: "https://paper-api.alpaca.markets"
+    data_url: "https://data.alpaca.markets/v2"
+    rate_limit: 200  # requests per minute
+    max_retries: 5
+    timeout: 30
+    supported_data:
+      - "5min_ohlcv"
+      - "daily_ohlcv"
+      - "trades"
+    cost: "free_tier"
+  
+  yfinance:
+    base_url: "https://query1.finance.yahoo.com/v8/finance"
+    rate_limit: 1000  # requests per hour
+    max_retries: 3
+    timeout: 10
+    supported_data:
+      - "daily_ohlcv"
+      - "5min_ohlcv"
+      - "dividends"
+      - "splits"
+    cost: "free"
+  
+  alpha_vantage:
+    base_url: "https://www.alphavantage.co/query"
+    rate_limit: 5  # requests per minute (free tier)
+    max_retries: 2
+    timeout: 15
+    supported_data:
+      - "daily_ohlcv"
+      - "intraday_5min"
+    cost: "free_tier_limited"
+  
+  interactive_brokers:
+    base_url: "localhost:5000"  # Gateway
+    rate_limit: 50  # requests per second
+    max_retries: 3
+    timeout: 30
+    supported_data:
+      - "5min_ohlcv"
+      - "tick_data"
+      - "options_chain"
+    cost: "commission_based"
+
+data_requirements:
+  ohlcv:
+    timeframe: "5min"
+    history_years: 10
+    fields: ["open", "high", "low", "close", "volume"]
+    adjustments: "split_and_dividend"
+  
+  macro_indicators:
+    vix: "^VIX"
+    treasury_10y: "^TNX"
+    treasury_3m: "^IRX"
+    sp500: "^GSPC"
+    update_frequency: "daily"
+  
+  universe:
+    primary: "data/universe/sp500_constituents.csv"
+    top_k: 50
+    liquidity_threshold: 1000000  # $1M daily volume
+
+storage:
+  raw_data:
+    format: "parquet"
+    compression: "zstd"
+    partitioning: "ticker/year/month/day"
+    base_path: "data/raw"
+  
+  processed_data:
+    format: "parquet" 
+    compression: "zstd"
+    base_path: "data/processed"
+  
+  temporary:
+    format: "parquet"
+    base_path: "staging/temp"
+
+refresh_schedule:
+  daily_ohlcv: "16:00"  # After market close
+  macro_data: "09:00"   # Before market open
+  full_refresh: "weekly" # Sunday 18:00
