@@ -1,0 +1,38 @@
+# Retail compute constraints for Quant Trading Pro
+compute:
+  max_memory_gb: 32
+  max_cores: 8
+  use_gpu: true
+  gpu_memory_gb: 8
+  max_runtime_hours: 6
+  parallel_workers: 4
+  batch_sizes:
+    data_download: 50
+    feature_computation: 100
+    backtesting: 10
+
+storage:
+  max_disk_gb: 1000
+  parquet_compression: zstd
+  retention_days:
+    raw: 60
+    processed: 180
+    models: 90
+    backtests: 365
+  partitioning:
+    raw: "ticker/year/month/day"
+    features: "feature_type/date"
+    backtests: "strategy/regime/date"
+
+api:
+  rate_limit_per_minute: 100
+  max_retries: 5
+  timeout_seconds: 30
+  fallback_chain: ["alpaca", "yfinance", "alpha_vantage"]
+  daily_call_budget: 5000
+
+constraints:
+  max_universe_size: 500
+  max_features_per_model: 50
+  max_backtest_years: 20
+  min_liquidity_threshold: 1000000  # $1M daily volume

@@ -1,0 +1,39 @@
+# Primary success metrics for Quant Trading Pro
+metrics:
+  primary:
+    information_coefficient:
+      target: 0.02
+      min_acceptable: 0.01
+      rolling_period: 63  # 3 months
+    sharpe_ratio:
+      target: 1.2
+      min_acceptable: 0.8
+      net_of_costs: true
+      rolling_period: 252  # 1 year
+  
+  secondary:
+    max_drawdown:
+      target: -0.15
+      max_acceptable: -0.25
+    hit_rate:
+      target: 0.55
+      min_acceptable: 0.52
+    turnover:
+      target: 5.0  # monthly
+      max_acceptable: 10.0
+  
+  operational:
+    data_completeness:
+      target: 0.98
+      min_acceptable: 0.95
+    pipeline_uptime:
+      target: 0.99
+      min_acceptable: 0.95
+
+regime_requirements:
+  consistency_across_regimes:
+    min_ic_correlation: 0.7
+    max_sharpe_variance: 0.3
+  regime_coverage:
+    required_regimes: ["low_vol", "medium_vol", "high_vol"]
+    min_data_per_regime: 0.15  # 15% of sample

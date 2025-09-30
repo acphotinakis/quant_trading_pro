@@ -1,0 +1,49 @@
+# Market regime definitions for Quant Trading Pro
+regime_indicators:
+  vix:
+    source: "yfinance"
+    symbol: "^VIX"
+    thresholds:
+      low_vol: 15
+      high_vol: 30
+    lookback_days: 21
+  
+  treasury_yields:
+    sources:
+      ten_year: "^TNX"
+      three_month: "^IRX"
+    spread_thresholds:
+      normal: 0.0
+      inverted: -0.5
+    lookback_days: 63
+  
+  market_breadth:
+    sources:
+      sp500_advance_decline: "SP500"
+      mcclellan_oscillator: "SP500"
+    thresholds:
+      bullish: 0.2
+      bearish: -0.2
+    lookback_days: 21
+
+regime_classification:
+  primary_regimes:
+    low_vol_bullish:
+      conditions:
+        vix: "low_vol"
+        yield_curve: "normal"
+        breadth: "bullish"
+    medium_vol_normal:
+      conditions:
+        vix: "medium_vol"
+        yield_curve: "normal"
+    high_vol_stress:
+      conditions:
+        vix: "high_vol"
+    inverted_yield:
+      conditions:
+        yield_curve: "inverted"
+  
+  classification_method: "rule_based"
+  reassessment_frequency: "daily"
+  minimum_regime_duration: 5  # days
