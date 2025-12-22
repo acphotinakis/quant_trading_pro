@@ -1,0 +1,35 @@
+# Refresh Schedule and Validation Configuration
+
+# Defines how often different data components should be updated.
+refresh_schedule:
+  # Daily OHLCV data for the top-K universe.
+  # Runs every weekday after market close.
+  daily_ohlcv:
+    frequency: "daily"
+    time: "16:30" # EST
+    days: ["mon", "tue", "wed", "thu", "fri"]
+
+  # A full, deep refresh of all historical data.
+  # Runs weekly to catch any corrections or fill gaps.
+  full_refresh:
+    frequency: "weekly"
+    day_of_week: "sun"
+    time: "18:00" # EST
+
+# Defines the validation checks to be run during the data acquisition pipeline.
+validation_checks:
+  # Enable or disable specific checks.
+  enabled:
+    - "missing_values"
+    - "price_outliers"
+    - "volume_outliers"
+    - "data_gaps"
+
+  # Parameters for specific checks.
+  parameters:
+    price_outliers:
+      # A price change greater than 50% in a single 5-min interval is flagged.
+      max_period_return: 0.5 
+    data_gaps:
+      # The expected interval for intraday data.
+      expected_interval_minutes: 5
