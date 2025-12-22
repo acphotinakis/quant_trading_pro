@@ -1,0 +1,29 @@
+# Configuration for Phase 3: Exploratory Data Analysis (EDA)
+
+# Parameters for feature calculation
+feature_params:
+  # Rolling window sizes (in days) for trendiness and stability metrics
+  rolling_windows:
+    - 5
+    - 10
+    - 21
+    - 63
+
+  # Parameters for Hurst Exponent calculation
+  hurst:
+    max_lags: 100
+
+  # Parameters for spectral analysis
+  spectral:
+    n_dominant_frequencies: 3
+
+# Parameters for feature analysis and validation
+analysis_params:
+  # Method for cross-sectional normalization ('z-score' or 'rank')
+  normalization_method: 'rank'
+
+  # Threshold for identifying highly correlated features to be flagged
+  correlation_threshold: 0.9
+
+  # Rolling window for stability analysis (e.g., 63 days = 1 quarter)
+  stability_window: 63
