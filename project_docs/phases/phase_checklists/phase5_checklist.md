@@ -27,9 +27,9 @@ This checklist outlines the necessary tasks for Phase 5: Modeling & Signal Devel
 - [ ] **Implement Advanced Ranking Model:**
     - [ ] Implement a more sophisticated model optimized for ranking, such as `XGBRanker` or `LightGBM` with a ranking objective.
     - [ ] Enable GPU utilization for training if available.
-- [ ] **Implement Regime-Aware Modeling:**
-    - [ ] Integrate regime data to train models that are specific to market conditions (e.g., high/low volatility).
-    - [ ] Evaluate model performance within each regime.
+- [ ] **Evaluate Models Across Regimes:**
+    - [ ] Integrate regime data to analyze model performance in different market conditions (e.g., high/low volatility).
+    - [ ] Report key metrics like IC and Sharpe Ratio for each regime to check for performance consistency.
 
 ### 3. Model Evaluation & Selection
 

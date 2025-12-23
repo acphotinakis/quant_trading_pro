@@ -9,7 +9,7 @@ This checklist covers the tasks for Phase 6: Transaction Cost & Execution Modeli
 - [ ] **Create Execution Modeling Module:**
     - [ ] Create a new module at `src/execution/cost_model.py` to house functions for slippage and transaction cost estimation.
 - [ ] **Create Position Sizing Module:**
-    - [ ] Create `src/execution/position_sizing.py` for rules on liquidity- and volatility-aware position sizing.
+    - [ ] Create `src/execution/position_sizing.py` for rules on liquidity-aware position sizing.
 - [ ] **Create Execution Configuration File:**
     - [ ] Create `config/execution.yaml` to define parameters for cost models (e.g., slippage coefficients), liquidity buckets, and position sizing rules (e.g., ADV caps).
 - [ ] **Create Test File:**
@@ -30,8 +30,6 @@ This checklist covers the tasks for Phase 6: Transaction Cost & Execution Modeli
 
 - [ ] **Implement Liquidity-Aware Position Sizing:**
     - [ ] In `position_sizing.py`, create rules to cap position sizes based on a stock's Average Daily Volume (ADV), e.g., not exceeding 10% of ADV.
-- [ ] **Implement Volatility-Adjusted Sizing:**
-    - [ ] Add logic to adjust position sizes based on a stock's realized volatility, reducing size for more volatile assets.
 - [ ] **Signal Adjustment:**
     - [ ] Create a pipeline that takes raw model scores from Phase 5 and adjusts them based on estimated transaction costs, penalizing signals for illiquid stocks.
 
